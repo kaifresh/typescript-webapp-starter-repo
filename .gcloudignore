@@ -1,0 +1,42 @@
+# This file specifies files that are *not* uploaded to Google Cloud Platform
+# using gcloud. It follows the same syntax as .gitignore, with the addition of
+# "#!include" directives (which insert the entries of the given .gitignore-style
+# file at that point).
+#
+# For more information, run:
+#   $ gcloud topic gcloudignore
+#
+.gcloudignore
+.gitignore
+.git
+
+# Ignore everything git ignores
+#!include:.gitignore
+
+# In git but not needed on server:
+.nowignore
+.npmrc
+.circleci
+.eslintrc.js
+.nyc_output
+.prettierrc.yaml
+.vscode/
+app.json
+docs/
+public
+__tests__/
+*.test.ts
+LICENSE
+README.md
+tslint.json
+
+# The (git-ignored) generated API schema is needed in production
+!server/schemas/*
+
+# Human readable API schema - possibly useful for live debugging 
+!api
+
+# DANGER ZONE. Intentionally deploy git-ignored secrets needed by app.
+# For safety, ensure only trusted users can view deployed files.
+!.env
+!auth_config.json

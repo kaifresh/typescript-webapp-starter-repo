@@ -1,0 +1,47 @@
+{
+  "name": "bubble-payment-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kaifresh/bubble-payment-backend.git",
+  "author": "KT <tan.kairen@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "commitlint": "^13.1.0",
+    "husky": "^7.0.2",
+    "json": "^11.0.0",
+    "lint-staged": "^11.1.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "chai": "^4.3.4",
+    "danger": "^10.6.6",
+    "eslint": "^7.32.0",
+    "mocha": "^9.1.1",
+    "nyc": "^15.1.0"
+  },
+  "engines": {
+    "node": ">= 12.0"
+  },
+  "scripts": {
+    "start:ts": "ts-node src/app.ts",
+    "start": "node build/app.js",
+    "clean": "rm -rf build",
+    "lint": "eslint",
+    "build": "yarn clean && tsc",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "set-environment": "cp .private.environments/.env.$ENVIRONMENT .env",
+    "use-development": "ENVIRONMENT=development yarn set-environment",
+    "use-staging": "ENVIRONMENT=staging yarn set-environment",
+    "use-production": "ENVIRONMENT=production yarn set-environment",
+    "deploy-generic": "echo ❌❌❌TODO❌❌❌",
+    "deploy-staging": "ENVIRONMENT=staging yarn deploy-generic",
+    "deploy-production": "ENVIRONMENT=production yarn deploy-generic",
+    "prepush": "yarn danger:prepush",
+    "prepush:prepush": "yarn danger local --base develop --dangerfile dangerfile.lite.js"
+  }
+}
