@@ -6,16 +6,31 @@
   "author": "KT <tan.kairen@gmail.com>",
   "license": "SEE LICENSE IN LICENSE.txt",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "class-validator-jsonschema": "^3.1.0",
     "commitlint": "^13.1.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^2.1.4",
     "husky": "^7.0.2",
     "json": "^11.0.0",
     "lint-staged": "^11.1.2",
+    "multer": "^1.4.3",
+    "program": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.9.0",
+    "routing-controllers-openapi": "^3.1.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.1",
     "@types/chai": "^4.2.22",
+    "@types/express": "^4.17.13",
+    "@types/http-status-codes": "^1.2.0",
     "@types/mocha": "^9.0.0",
+    "@types/multer": "^1.4.7",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "chai": "^4.3.4",
@@ -42,6 +57,15 @@
     "deploy-staging": "ENVIRONMENT=staging yarn deploy-generic",
     "deploy-production": "ENVIRONMENT=production yarn deploy-generic",
     "prepush": "yarn danger:prepush",
-    "prepush:prepush": "yarn danger local --base develop --dangerfile dangerfile.lite.js"
+    "prepush:prepush": "yarn danger local --base develop --dangerfile dangerfile.lite.js",
+    "api:generate-swagger-spec": "mkdir -p api && ts-node src/generate-open-api-spec.ts -o ./api/open-api-spec.json",
+    "api:docs": "npx speccy serve api/open-api-spec.json",
+    "api:docs:watch": "nodemon --exec \"npx speccy serve api/open-api-spec.json\" -w api/open-api-spec.json -w api/components -e \"yaml\" --verbose",
+    "api:lint": "npx speccy lint --skip openapi-tags --skip operation-tags api/open-api-spec.json",
+    "api:resolve": "npx speccy resolve api/open-api-spec.json > api/resolved.yaml",
+    "api:docs-static": "yarn api:resolve && redoc-cli bundle api/resolved.yaml && mkdir -p apidocs && mv redoc-static.html apidocs/index.html",
+    "api:docs-publish": "yarn api:docs-static && gh-pages -d apidocs",
+    "api:toJsonSchema": "yarn api:resolve && mkdir -p server/schemas && openapi2schema -i api/resolved.yaml > server/schemas/api.json",
+    "api:monitor": "nodemon --exec \"yarn api:toJsonSchema\" -w api/open-api-spec.json -w api/components -e \"yaml\" --verbose"
   }
 }

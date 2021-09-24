@@ -59,7 +59,7 @@ yarn run json -I -f package.json -e 'this.scripts["prepush:prepush"]="yarn dange
 
 
 # Create tsconfig
-tsc --init --strict --target ES2019 --outDir "./build"  --noUnusedLocals  --noUnusedParameters --noImplicitReturns --noFallthroughCasesInSwitch  --lib "esnext" --sourceMap
+tsc --init --strict --target ES2019 --outDir "./build"  --noUnusedLocals  --noUnusedParameters --noImplicitReturns --noFallthroughCasesInSwitch  --experimentalDecorators --lib "esnext" --sourceMap
 
 # Create eslintrc (@see https://khalilstemmler.com/blogs/typescript/eslint-for-typescript/)
 cat <<EOT >> .eslintrc
@@ -114,6 +114,8 @@ curl -k https://gist.githubusercontent.com/kaifresh/7f4f6d1bd94f26b06a8bca6a2e34
 
 # Add a readme
 curl -k https://raw.githubusercontent.com/othneildrew/Best-README-Template/master/BLANK_README.md -o README.MD
+
+typac express routing-controllers routing-controllers-openapi reflect-metadata class-validator class-transformer class-validator-jsonschema http-status-codes
 
 git add .
 git commit -m 'Initial Repository Setup'
