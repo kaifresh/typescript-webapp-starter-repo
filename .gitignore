@@ -1,3 +1,9 @@
+# build folder
+build
+
+# Secrets folder
+.private.environments
+
 # Logs
 logs
 *.log
