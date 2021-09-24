@@ -66,6 +66,7 @@
     "api:docs-static": "yarn api:resolve && redoc-cli bundle api/resolved.yaml && mkdir -p apidocs && mv redoc-static.html apidocs/index.html",
     "api:docs-publish": "yarn api:docs-static && gh-pages -d apidocs",
     "api:toJsonSchema": "yarn api:resolve && mkdir -p server/schemas && openapi2schema -i api/resolved.yaml > server/schemas/api.json",
-    "api:monitor": "nodemon --exec \"yarn api:toJsonSchema\" -w api/open-api-spec.json -w api/components -e \"yaml\" --verbose"
+    "api:monitor": "nodemon --exec \"yarn api:toJsonSchema\" -w api/open-api-spec.json -w api/components -e \"yaml\" --verbose",
+    "docker:build": "docker build . -t kaifresh/express-typescript-routingcontrollers-webapp"
   }
 }
